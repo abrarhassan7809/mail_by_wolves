@@ -17,82 +17,91 @@ class _EmailPageState extends State<EmailPage> {
       appBar: AppBar(
         title: const Text("Email"),
         actions: [
-          PopupMenuButton<String>(
-            offset: const Offset(0, 50),
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.orange,
-                borderRadius: BorderRadius.circular(3.0)
-              ),
-              padding: EdgeInsets.all(5),
-              child: Row(
-                children: [
-                  Text(
-                    "New",
-                    style: TextStyle(fontSize: 18,),
-                  ),
-                  SizedBox(width: 10),
-                  Icon(Icons.arrow_drop_down),
-                  SizedBox(width: 10),
-                ],
-              ),
+          Container(
+            height: 40,
+            width: 140,
+            decoration: BoxDecoration(
+              color: Colors.orange,
+              borderRadius: BorderRadius.circular(3.0),
             ),
-            onSelected: (value) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('$value selected')),
-              );
-            },
-            itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
-              PopupMenuItem<String>(
-                value: 'Email',
-                child: ListTile(
-                  leading: Icon(Icons.email_outlined),
-                  title: Text('Email'),
+            padding: const EdgeInsets.symmetric(horizontal: 4.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                TextButton(
+                  child: Row(
+                    children: [
+                      Icon(Icons.mail, color: Colors.white, size: 18,),
+                      SizedBox(width: 7,),
+                      Text("New", style: TextStyle(fontSize: 16, color: Colors.white)),
+                    ],
+                  ),
+                  onPressed: () {},
                 ),
-              ),
-              PopupMenuItem<String>(
-                value: 'Appointment',
-                child: ListTile(
-                  leading: Icon(Icons.calendar_today_outlined),
-                  title: Text("Appointment"),
+                VerticalDivider(width: 1, color: Colors.white,),
+                PopupMenuButton<String>(
+                  offset: const Offset(0, 40),
+                  icon: const Icon(Icons.arrow_drop_down, color: Colors.white),
+                  onSelected: (value) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('$value selected')),
+                    );
+                  },
+                  itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+                    PopupMenuItem<String>(
+                      value: 'Email',
+                      child: ListTile(
+                        leading: Icon(Icons.email_outlined),
+                        title: Text('Email'),
+                      ),
+                    ),
+                    PopupMenuItem<String>(
+                      value: 'Appointment',
+                      child: ListTile(
+                        leading: Icon(Icons.calendar_today_outlined),
+                        title: Text("Appointment"),
+                      ),
+                    ),
+                    PopupMenuItem<String>(
+                      value: 'Contact',
+                      child: ListTile(
+                        leading: Icon(Icons.contacts_outlined),
+                        title: Text("Contact"),
+                      ),
+                    ),
+                    PopupMenuItem<String>(
+                      value: 'Task',
+                      child: ListTile(
+                        leading: Icon(Icons.task_outlined),
+                        title: Text("Task"),
+                      ),
+                    ),
+                    PopupMenuItem<String>(
+                      value: 'Note',
+                      child: ListTile(
+                        leading: Icon(Icons.note_outlined),
+                        title: Text("Note"),
+                      ),
+                    ),
+                    PopupMenuItem<String>(
+                      value: 'Online Meeting',
+                      child: ListTile(
+                        leading: Icon(Icons.meeting_room_outlined),
+                        title: Text("Online Meeting"),
+                      ),
+                    ),
+                    PopupMenuItem<String>(
+                      value: 'Documents',
+                      child: ListTile(
+                        leading: Icon(Icons.file_copy_outlined),
+                        title: Text("Documents"),
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-              PopupMenuItem<String>(
-                value: 'Contact',
-                child: ListTile(
-                  leading: Icon(Icons.contacts_outlined),
-                  title: Text("Contact"),
-                ),
-              ),
-              PopupMenuItem<String>(
-                value: 'Task',
-                child: ListTile(
-                  leading: Icon(Icons.task_outlined),
-                  title: Text("Task"),
-                ),
-              ),
-              PopupMenuItem<String>(
-                value: 'Note',
-                child: ListTile(
-                  leading: Icon(Icons.note_outlined),
-                  title: Text("Note"),
-                ),
-              ),
-              PopupMenuItem<String>(
-                value: 'Online Meeting',
-                child: ListTile(
-                  leading: Icon(Icons.meeting_room_outlined),
-                  title: Text("Online Meeting"),
-                ),
-              ),
-              PopupMenuItem<String>(
-                value: 'Documents',
-                child: ListTile(
-                  leading: Icon(Icons.file_copy_outlined),
-                  title: Text("Documents"),
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
           IconButton(
             icon: const Icon(Icons.logout),
@@ -102,7 +111,7 @@ class _EmailPageState extends State<EmailPage> {
           ),
         ],
       ),
-      drawer: AppDrawer(),
+      drawer: const AppDrawer(),
       body: Center(
         child: Text(
           widget.userEmail != null ? "Welcome, ${widget.userEmail}!" : "Welcome to Emails!",
