@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:mail_by_wolves/pages/widgets/item_card_list.dart';
 import 'widgets/app_drawer.dart';
+import 'package:mail_by_wolves/pages/widgets/action_bar.dart';
 
 class EmailPage extends StatefulWidget {
   final String? userEmail;
@@ -30,16 +32,20 @@ class _EmailPageState extends State<EmailPage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 TextButton(
-                  child: Row(
+                  child: const Row(
                     children: [
-                      Icon(Icons.mail, color: Colors.white, size: 18,),
-                      SizedBox(width: 7,),
+                      Icon(Icons.mail, color: Colors.white, size: 18),
+                      SizedBox(width: 7),
                       Text("New", style: TextStyle(fontSize: 16, color: Colors.white)),
                     ],
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('New Email functionality not implemented.')),
+                    );
+                  },
                 ),
-                VerticalDivider(width: 1, color: Colors.white,),
+                const VerticalDivider(width: 1, color: Colors.white),
                 PopupMenuButton<String>(
                   offset: const Offset(0, 40),
                   icon: const Icon(Icons.arrow_drop_down, color: Colors.white),
@@ -48,7 +54,7 @@ class _EmailPageState extends State<EmailPage> {
                       SnackBar(content: Text('$value selected')),
                     );
                   },
-                  itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+                  itemBuilder: (BuildContext context) => const <PopupMenuEntry<String>>[
                     PopupMenuItem<String>(
                       value: 'Email',
                       child: ListTile(
@@ -112,10 +118,14 @@ class _EmailPageState extends State<EmailPage> {
         ],
       ),
       drawer: const AppDrawer(),
-      body: Center(
-        child: Text(
-          widget.userEmail != null ? "Welcome, ${widget.userEmail}!" : "Welcome to Emails!",
-          style: const TextStyle(fontSize: 22),
+      body: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Column(
+          children: [
+            const ActionBar(),
+            const SizedBox(height: 20),
+            ItemCardList(),
+          ],
         ),
       ),
     );

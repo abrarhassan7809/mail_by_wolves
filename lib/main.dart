@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mail_by_wolves/pages/email_page.dart';
-import 'package:mail_by_wolves/pages/login_page.dart';
-import 'package:mail_by_wolves/pages/register_page.dart';
+import 'package:mail_by_wolves/pages/registration/login_page.dart';
+import 'package:mail_by_wolves/pages/registration/register_page.dart';
 
 void main() {
   runApp(const MyApp());

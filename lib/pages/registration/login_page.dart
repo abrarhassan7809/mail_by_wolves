@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mail_by_wolves/pages/email_page.dart';
-import 'package:mail_by_wolves/pages/register_page.dart';
+import 'package:mail_by_wolves/pages/registration/register_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -13,29 +13,10 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  String? registeredUsername;
   String? registeredEmail;
   String? registeredPassword;
 
   final _formKey = GlobalKey<FormState>();
-
-  void _onLogin() {
-    if (_formKey.currentState?.validate() ?? false) {
-      if (_emailController.text == registeredEmail &&
-          _passwordController.text == registeredPassword) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => EmailPage(userEmail: registeredEmail),
-          ),
-        );
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Invalid Credentials')),
-        );
-      }
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -99,18 +80,16 @@ class _LoginPageState extends State<LoginPage> {
                     if (value == null || value.isEmpty) {
                       return "Please enter your password";
                     }
-                    if (value.length < 6) {
-                      return 'Password must be at least 6 characters';
-                    }
                     return null;
                   },
                 ),
                 SizedBox(height: 10,),
                 ElevatedButton(
-                  onPressed: _onLogin,
-                  child: const Text("Login"),
+                  onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => EmailPage(userEmail: _emailController.text)));
+                  }, child: Text("Login"),
                   style: ElevatedButton.styleFrom(
-                    minimumSize: const Size(double.infinity, 50),
+                    minimumSize: Size(double.infinity, 50)
                   ),
                 ),
                 SizedBox(height: 10,),
